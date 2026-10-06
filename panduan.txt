@@ -1,0 +1,199 @@
+═══════════════════════════════════════════════════════════════════════
+PANDUAN WEBSITE PORTOFOLIO INTERAKTIF (Tailwind + AOS + Lenis + GAS)
+Luky Wahyu Saputra, S.T.
+═══════════════════════════════════════════════════════════════════════
+
+DAFTAR ISI
+─────────────────────────────────────────────────────────────────────────────
+1) Cara Menjalankan Website
+2) Struktur File
+3) Cara Menambahkan / Mengubah Link Foto, CV, Google Drive, dan Sosmed
+4) Mengubah Loading Screen (warna, teks, durasi)
+5) Mengubah Warna Tema Utama (skema warna)
+6) Mengubah Tulisan / Konten
+7) Fitur Interaktif (yang ada di website)
+8) Troubleshooting
+
+─────────────────────────────────────────────────────────────────────────────
+1) CARA MENJALANKAN WEBSITE
+─────────────────────────────────────────────────────────────────────────────
+Metode A (paling cepat):
+1. Buka folder “Portfolio Luky”
+2. Double click “index.html”
+
+Metode B (recommended): Live Server (VS Code)
+1. Install extension “Live Server”
+2. Klik kanan index.html → “Open with Live Server"
+3. Buka link http://localhost:xxxxx
+
+─────────────────────────────────────────────────────────────────────────────
+2) STRUKTUR FILE
+─────────────────────────────────────────────────────────────────────────────
+- index.html  : Struktur halaman + tag Tailwind, AOS, FontAwesome, dan markup konten
+- style.css   : Semua CSS kustom (glass, scrollbar, cursor glow, progress bar, dll)
+- script.js   : Semua JavaScript kustom (AOS init, Lenis init, typing effect, progress bar, form submit)
+- panduan.txt  : Dokumen ini
+
+─────────────────────────────────────────────────────────────────────────────
+3) CARA MENAMBAHKAN / MENGUBAH LINK FOTO, CV, GOOGLE DRIVE, DAN SOSMED
+─────────────────────────────────────────────────────────────────────────────
+Catatan penting:
+- Semua link yang bisa kamu ubah letaknya ada di index.html.
+- Cari teks komentar “GANTI … DI SINI” pada index.html.
+
+3A. Mengubah Link FOTO (G-DRIVE / URL gambar)
+1. Buka index.html
+2. Cari komentar:
+   “GANTI LINK FOTO G-DRIVE DI SINI”
+3. Ubah atribut src pada tag img, contoh:
+   <img src="PASTE_URL_FOTO" ...>
+4. Jika memakai link Google Drive / server gambar, pastikan formatnya langsung berupa file gambar (png/jpg), bukan halaman preview.
+
+Rekomendasi format foto agar cepat:
+- Upload foto ke layanan hosting yang menghasilkan URL langsung (misal: i.ibb.co) atau gunakan URL googleusercontent.
+
+3B. Mengubah Link CV (Google Drive)
+1. Buka index.html
+2. Cari komentar:
+   “GANTI LINK CV DI SINI”
+3. Ubah href pada tombol:
+   <a href="PASTE_URL_CV" target="_blank">Unduh CV (PDF)</a>
+
+Format link Google Drive untuk download langsung:
+- Jika link kamu masih model preview:
+  https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+- Ubah menjadi:
+  https://drive.google.com/uc?export=download&id=FILE_ID
+
+3C. Mengubah Link SOSMED (Instagram & LinkedIn)
+1. Buka index.html
+2. Cari komentar:
+   “GANTI LINK SOSMED DI SINI”
+3. Ubah href pada masing-masing link icon:
+- LinkedIn:
+  href="PASTE_LINK_LINKEDIN"
+- Instagram:
+  href="PASTE_LINK_INSTAGRAM"
+
+3D. Mengubah Link JURNAL / Publikasi (opsional)
+1. Buka index.html
+2. Cari komentar:
+   “GANTI LINK JURNAL DI SINI”
+3. Ubah href pada tombol “Lihat Jurnal” untuk 3 jurnal.
+
+─────────────────────────────────────────────────────────────────────────────
+4) MENGUBAH LOADING SCREEN (WARNA, TEKS, DURASI)
+─────────────────────────────────────────────────────────────────────────────
+PENTING:
+- Loading screen di website kamu ada di index.html (elemen DOM) dan durasinya biasanya dipengaruhi oleh CSS &/atau script.js.
+
+4A. Mengubah Teks Loading
+1. Buka index.html
+2. Cari bagian Loading Screen:
+   id="loading"
+3. Ubah teks di dalamnya, misal yang ada class loading-typing.
+
+4B. Mengubah Warna Loading
+1. Buka style.css
+2. Cari selector:
+   .loading-container
+   .loader
+   @keyframes fadeOut
+3. Ubah background gradient pada .loading-container
+   Misal:
+   background: linear-gradient(135deg, WARNA1 0%, WARNA2 100%);
+
+4C. Mengubah Durasi Hilangnya Loading
+1. Buka style.css
+2. Cari baris animasi loading-container:
+   animation: fadeOut 0.5s ease-in-out 2.5s forwards;
+Arti format:
+- fadeOut 0.5s  → lama animasi fade
+- 2.5s         → delay sebelum fade dimulai
+- forwards    → tetap di state akhir
+
+Ubah angka 0.5 dan/atau 2.5 sesuai kebutuhan.
+
+4D. Mengubah Kecepatan Efek Typing Loading (jika ada)
+1. Buka script.js
+2. Cari kode yang mengatur loading-typing (jika tersedia)
+3. Ubah speed/timing sesuai kebutuhan.
+
+─────────────────────────────────────────────────────────────────────────────
+5) MENGUBAH WARNA TEMA UTAMA (SKEMA WARNA)
+─────────────────────────────────────────────────────────────────────────────
+Warna utama website dikendalikan dari style.css (CSS variables).
+
+1. Buka style.css
+2. Cari block:
+   :root { ... }
+3. Ubah value pada variable berikut:
+- --primary
+- --secondary
+- --dark
+
+Contoh:
+:root {
+  --primary: #0ea5e9;
+  --secondary: #6366f1;
+  --dark: #0f172a;
+}
+
+Perubahan variable ini akan mempengaruhi:
+- progress bar
+- glass border (yang mengarah ke primary)
+- glow effect
+- cursor glow
+
+─────────────────────────────────────────────────────────────────────────────
+6) MENGUBAH TULISAN / KONTEN LAIN
+─────────────────────────────────────────────────────────────────────────────
+- Semua teks konten ada di index.html.
+- Tinggal edit langsung teksnya.
+
+Tips:
+- Untuk bagian hero: cari id="typing-text" atau teks di sekitarnya.
+- Untuk bagian proyeksi: cari section id="profil", id="proyek", id="organisasi", id="kontak".
+
+─────────────────────────────────────────────────────────────────────────────
+7) FITUR INTERAKTIF YANG ADA DI WEBSITE
+─────────────────────────────────────────────────────────────────────────────
+✓ Smooth scroll (Lenis)
+✓ Animasi saat scroll (AOS)
+✓ Typing effect (teks di hero)
+✓ Scroll progress bar (progress di atas halaman)
+✓ Cursor glow (efek cahaya mengikuti mouse)
+✓ Form kontak
+  - Form menggunakan google.script.run.processForm(formData)
+
+─────────────────────────────────────────────────────────────────────────────
+8) TROUBLESHOOTING
+─────────────────────────────────────────────────────────────────────────────
+8A. Form kontak tidak bisa mengirim
+Gejala: tombol submit tidak bekerja / status menampilkan gagal.
+Penyebab umum:
+- Website belum terhubung ke Google Apps Script Web App
+- Fungsi processForm tidak ada / belum di-deploy
+
+Solusi:
+1. Buka script Google Apps Script (Code.gs)
+2. Pastikan ada fungsi:
+   processForm(formData)
+3. Pastikan sudah di-deploy sebagai Web App
+4. Di deployment, pastikan “Allow access” sesuai kebutuhan.
+
+8B. Foto tidak muncul
+Solusi cepat:
+- Pastikan src foto adalah URL gambar langsung.
+- Cek di browser:
+  klik kanan pada gambar (atau buka URL src) apakah menghasilkan file gambar.
+
+8C. Loading screen tidak hilang
+Solusi cepat:
+- Pastikan file style.css dan script.js termuat.
+- Buka Console (F12) untuk melihat error JavaScript.
+
+─────────────────────────────────────────────────────────────────────────────
+SELESAI
+Versi panduan: 2026
+
